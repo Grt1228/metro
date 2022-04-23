@@ -18,7 +18,10 @@ func SetRouters() *gin.Engine {
 	r.GET("/swagger/*ang", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	v1 := r.Group("/api/v1")
-	v1.POST("/metros", controller.AddMetros)
+	//新增
+	v1.POST("/metro", controller.AddMetros)
+	//删除
+	//v1.DELETE("/metro/{id}",controller.DelMetros)
 
 	return r
 }

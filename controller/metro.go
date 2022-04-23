@@ -8,9 +8,12 @@ import (
 
 func AddMetros(c *gin.Context) {
 	var metro model.Metro
+
 	if err := c.ShouldBind(&metro); err != nil {
-		ResponseSuccess(c, "参数异常")
+		ResponseError(c, "参数异常")
+		return
 	}
 	id := service.AddMetro(&metro)
 	ResponseSuccess(c, id)
+	return
 }

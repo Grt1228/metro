@@ -19,3 +19,11 @@ func ResponseSuccess(c *gin.Context, data interface{}) {
 	}
 	c.JSON(http.StatusOK, resp)
 }
+
+func ResponseError(c *gin.Context, msg string) {
+	resp := &Response{
+		Code: 500,
+		Msg:  msg,
+	}
+	c.JSON(http.StatusInternalServerError, resp)
+}
