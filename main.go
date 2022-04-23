@@ -19,11 +19,11 @@ func main() {
 
 	//创建数据库连接
 	fmt.Println("加载数据库连接~~~~~~~~~~~~~~~~~~~")
-	err = dao.Setup()
-	if err != nil {
+	if err = dao.Init(settings.Conf.MysqlConfig); err != nil {
 		fmt.Printf("加载数据库连接失败：%s \n ~~~~~~~~~~~~~~~~~~~", err)
 	}
 	fmt.Println("加载数据库连接成功~~~~~~~~~~~~~~~~~~~")
+	defer dao.Close() // 程序退出关闭数据库连接
 	r := router.SetRouters()
 	r.Run()
 }

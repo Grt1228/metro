@@ -2,35 +2,15 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"metro/dao"
 	"metro/model"
-	"time"
+	"metro/service"
 )
 
-func Metros(c *gin.Context) {
-	metro := model.Metro{
-		ChnName:      "chnName",
-		EngName:      "engName",
-		ShortName:    "shortName",
-		FirstLetter:  "S",
-		Icon:         "icon",
-		OperatePic:   "operatePic",
-		PlanPic:      "planPic",
-		Website:      "website",
-		City:         "city",
-		Length:       100,
-		LineNum:      10,
-		StandNum:     100,
-		OpenDate:     "19990101",
-		BuildDate:    "19960101",
-		BuildCompany: "buildCompany",
-		Desc:         "desc",
-		TicketDesc:   "ticketDesc",
-		CreateTime:   time.Now(),
-		UpdateTime:   time.Now(),
+func AddMetros(c *gin.Context) {
+	var metro model.Metro
+	if err := c.ShouldBind(&metro); err != nil {
+		ResponseSuccess(c, "参数异常")
 	}
-	db := dao.GetDB()
-	db.Create(&metro)
-	//db.Find(&metro)
-	ResponseSuccess(c, metro)
+	id := service.AddMetro(&metro)
+	ResponseSuccess(c, id)
 }

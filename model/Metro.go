@@ -19,12 +19,12 @@ type Metro struct {
 	OpenDate     string
 	BuildDate    string
 	BuildCompany string
-	Desc         string
+	Remark       string
 	TicketDesc   string
 	CreateTime   time.Time
 	UpdateTime   time.Time
 }
 
-func (Metro) TableName() string {
-	return "metro"
-}
+//func (Metro) TableName() string {
+//	return "metro"
+//}
