@@ -1,6 +1,8 @@
 package dao
 
 import (
+	"fmt"
+	"metro/controller/req"
 	"metro/model"
 )
 
@@ -16,4 +18,15 @@ func InsertMetros(metro *model.Metro) (id int64) {
 func DelMetros(id int64) {
 	sql := "update metro set delete_status = 1 where id = ?"
 	db.MustExec(sql, id)
+}
+
+func ListMetros(param *req.MetroListReq) []model.Metro {
+
+	sql := "select * from metro where chn_name like CONCAT('%',?,'%') order by id desc limit ?,?"
+	var metros []model.Metro
+	if err := db.Select(&metros, sql, param.Name, param.Page, param.Size); err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("users:%#v\n", metros)
+	return metros
 }

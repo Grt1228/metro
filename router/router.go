@@ -22,6 +22,8 @@ func SetRouters() *gin.Engine {
 	v1.POST("/metro", controller.AddMetros)
 	//删除
 	v1.DELETE("/metro/:id", controller.DelMetros)
+	//集合查询
+	v1.POST("/metros", controller.ListMetros)
 
 	return r
 }

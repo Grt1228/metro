@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"metro/controller/req"
 	"metro/model"
 	"metro/service"
 	"strconv"
@@ -24,5 +25,13 @@ func DelMetros(c *gin.Context) {
 	id, _ := strconv.ParseInt(idStr, 10, 64)
 	service.DelMetros(id)
 	ResponseSuccess(c, 1)
+	return
+}
+
+func ListMetros(c *gin.Context) {
+	var param req.MetroListReq
+	c.ShouldBind(&param)
+	metros := service.ListMetros(&param)
+	ResponseSuccess(c, metros)
 	return
 }
