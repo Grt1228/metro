@@ -9,7 +9,11 @@ func InsertMetros(metro *model.Metro) (id int64) {
 		`VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`
 	exec := db.MustExec(insertSql, metro.ChnName, metro.EngName, metro.ShortName, metro.FirstLetter, metro.Icon, metro.OperatePic, metro.PlanPic, metro.Website,
 		metro.City, metro.Length, metro.LineNum, metro.StandNum, metro.OpenDate, metro.BuildDate, metro.BuildCompany, metro.Remark, metro.TicketDesc)
-	println(exec.LastInsertId())
 	id, _ = exec.LastInsertId()
 	return id
+}
+
+func DelMetros(id int64) {
+	sql := "update metro set delete_status = 1 where id = ?"
+	db.MustExec(sql, id)
 }
